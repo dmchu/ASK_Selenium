@@ -34,6 +34,7 @@ class UserFirstNameTestSuit(unittest.TestCase):
         group_id = "A007"
         password = "12345"
         confirm_password = "12345"
+        # TODO DC: May need to make separate file for parameters
 
         # opens the registration page
         driver.get('http://local.school.portnov.com:4520/#/registration')
