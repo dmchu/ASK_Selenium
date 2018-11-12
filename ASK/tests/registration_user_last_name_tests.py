@@ -13,6 +13,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 #         print(by, value, "found")
 #     def on_exception(self, exception, driver):
 #         print(exception)
+from steps.common import click
+
 
 class UserLastNameTestSuit(unittest.TestCase):
 
@@ -50,7 +52,7 @@ class UserLastNameTestSuit(unittest.TestCase):
         driver.find_element_by_id("mat-input-3").send_keys(group_id)
         driver.find_element_by_id("mat-input-4").send_keys(password)
         driver.find_element_by_id("mat-input-5").send_keys(confirm_password)
-        driver.find_element_by_class_name("mat-raised-button").click()
+        click()
 
         # Waits until new page loads
         back_to_login_page_btn = (By.XPATH, "//button/span[text()='Back to Login Page']")
@@ -93,7 +95,7 @@ class UserLastNameTestSuit(unittest.TestCase):
         driver.find_element_by_id("mat-input-3").send_keys(group_id)
         driver.find_element_by_id("mat-input-4").send_keys(password)
         driver.find_element_by_id("mat-input-5").send_keys(confirm_password)
-        driver.find_element_by_class_name("mat-raised-button").click()
+        click()
 
         # Waits until new page loads
         back_to_login_page_btn = (By.XPATH, "//button/span[text()='Back to Login Page']")
@@ -132,7 +134,7 @@ class UserLastNameTestSuit(unittest.TestCase):
         driver.find_element_by_id("mat-input-3").send_keys(group_id)
         driver.find_element_by_id("mat-input-4").send_keys(password)
         driver.find_element_by_id("mat-input-5").send_keys(confirm_password)
-        driver.find_element_by_class_name("mat-raised-button").click()
+        click()
 
         # Verify that error message presents
         expected_error_msg = "This field is required"
@@ -170,7 +172,7 @@ class UserLastNameTestSuit(unittest.TestCase):
         driver.find_element_by_id("mat-input-3").send_keys(group_id)
         driver.find_element_by_id("mat-input-4").send_keys(password)
         driver.find_element_by_id("mat-input-5").send_keys(confirm_password)
-        driver.find_element_by_class_name("mat-raised-button").click()
+        click()
 
         # Waits until new page loads
         back_to_login_page_btn = (By.XPATH, "//button/span[text()='Back to Login Page']")
@@ -211,7 +213,7 @@ class UserLastNameTestSuit(unittest.TestCase):
         driver.find_element_by_id("mat-input-3").send_keys(group_id)
         driver.find_element_by_id("mat-input-4").send_keys(password)
         driver.find_element_by_id("mat-input-5").send_keys(confirm_password)
-        driver.find_element_by_class_name("mat-raised-button").click()
+        click()
 
         error = (By.XPATH, "//div[@class='cdk-global-overlay-wrapper']//simple-snack-bar")
         wait.until(EC.presence_of_element_located(error))
@@ -248,7 +250,7 @@ class UserLastNameTestSuit(unittest.TestCase):
         driver.find_element_by_id("mat-input-3").send_keys(group_id)
         driver.find_element_by_id("mat-input-4").send_keys(password)
         driver.find_element_by_id("mat-input-5").send_keys(confirm_password)
-        driver.find_element_by_class_name("mat-raised-button").click()
+        click()
 
         # Verify that error message presents
         expected_error_msg = "Whitespaces are not allowed"
@@ -283,7 +285,7 @@ class UserLastNameTestSuit(unittest.TestCase):
         driver.find_element_by_id("mat-input-3").send_keys(group_id)
         driver.find_element_by_id("mat-input-4").send_keys(password)
         driver.find_element_by_id("mat-input-5").send_keys(confirm_password)
-        driver.find_element_by_class_name("mat-raised-button").click()
+        click()
 
         # Verify that error message presents
         expected_error_msg = "Whitespaces are not allowed"
@@ -318,7 +320,7 @@ class UserLastNameTestSuit(unittest.TestCase):
         driver.find_element_by_id("mat-input-3").send_keys(group_id)
         driver.find_element_by_id("mat-input-4").send_keys(password)
         driver.find_element_by_id("mat-input-5").send_keys(confirm_password)
-        driver.find_element_by_class_name("mat-raised-button").click()
+        click()
 
         # Verify that error message presents
         expected_error_msg = "Whitespaces are not allowed"

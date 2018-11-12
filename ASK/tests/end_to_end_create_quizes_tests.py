@@ -21,6 +21,8 @@ import re
 #         print(by, value, "found")
 #     def on_exception(self, exception, driver):
 #         print(exception)
+from steps.common import click
+
 
 class CreateQuizes(unittest.TestCase):
 
@@ -28,7 +30,7 @@ class CreateQuizes(unittest.TestCase):
         self.driver = webdriver.Chrome(executable_path="../browsers/chromedriver")
         # self.driver = EventFiringWebDriver(webdriver.Chrome(executable_path="../browsers/chromedriver"), MyListener())
         #self.driver = webdriver.Firefox(executable_path="../browsers/geckodriver")
-        self.wait = WebDriverWait(self.driver, 10)
+        self.wait = WebDriverWait(self.driver, 20)
 
     def test_create_quizes(self):
         """ Verify that user with Teachers role can Create Quiz with 3 Textual, 3 Single-Choice,
@@ -54,39 +56,28 @@ class CreateQuizes(unittest.TestCase):
         driver.get(login_url)
         driver.find_element_by_id("mat-input-0").send_keys(email_teacher)
         driver.find_element_by_id("mat-input-1").send_keys(password_teacher)
-        driver.find_element_by_css_selector("button[type='submit']").click()
+        click()
 
-        wait.until(EC.presence_of_element_located((By.XPATH, "// div[@class = 'info']/p[contains(text(),'TEACHER')]")))
-        sleep(1)
-
+        wait.until(EC.visibility_of_element_located((By.XPATH, "// div[@class = 'info']/p[contains(text(),'TEACHER')]")))
         driver.find_element(By.PARTIAL_LINK_TEXT, "Quizzes").click()
-
         wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "a[href='#/quiz-builder']")))
-
         driver.find_element(By.PARTIAL_LINK_TEXT,"Create New Quiz").click()
 
         driver.find_element(By.TAG_NAME,"input").send_keys(quiz_name)
 
-        driver.find_element(By.CSS_SELECTOR, "div.controls.ng-star-inserted>button").click()
-        sleep(1)
-        driver.find_element(By.XPATH, "//*[contains(text(), 'new empty question')]/../../..//div[contains(text(), 'Textual')]").click()
-        sleep(1)
-        driver.find_element(By.CSS_SELECTOR, "div.mat-input-infix.mat-form-field-infix textarea").send_keys(textual_question_1)
-        sleep(1)
-        driver.find_element(By.CSS_SELECTOR, "div.controls.ng-star-inserted>button").click()
-        sleep(1)
-        driver.find_element(By.XPATH, "//*[contains(text(), 'new empty question')]/../../..//div[contains(text(), 'Textual')]").click()
-        sleep(1)
-        driver.find_element(By.XPATH, "//*[contains(text(), 'new empty question')]/../../..//textarea[@placeholder='Question *']").send_keys(textual_question_2)
-        sleep(1)
-        driver.find_element(By.CSS_SELECTOR, "div.controls.ng-star-inserted>button").click()
-        sleep(1)
-        driver.find_element(By.XPATH, "//*[contains(text(), 'new empty question')]/../../..//div[contains(text(), 'Textual')]").click()
-        sleep(1)
-        driver.find_element(By.XPATH,"//*[contains(text(), 'new empty question')]/../../..//textarea[@placeholder='Question *']").send_keys(textual_question_3)
-        sleep(1)
-        driver.find_element(By.CSS_SELECTOR, "div.controls.ng-star-inserted>button").click()
-        sleep(1)
+        click()
+        click()
+        wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "div.mat-input-infix.mat-form-field-infix textarea"))).send_keys(textual_question_1)
+
+        click()
+        wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "div.left.wide mat-slider")))
+        click()
+        wait.until(EC.visibility_of_element_located((By.XPATH, "//*[contains(text(), 'new empty question')]/../../..//textarea[@placeholder='Question *']"))).send_keys(textual_question_2)
+
+        click()
+        wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "div.left.wide mat-slider")))
+        click()
+        wait.until(EC.visibility_of_element_located((By.XPATH,"//*[contains(text(), 'new empty question')]/../../..//textarea[@placeholder='Question *']"))).send_keys(textual_question_3)
 
         # Single choice questions:
         single_choice_1 = "What is a Defect?"
@@ -99,39 +90,30 @@ class CreateQuizes(unittest.TestCase):
         single_choice_3_opt_1 = "without code executing the program is called as Static Testing."
         single_choice_3_opt_2 = "with code"
 
-        driver.find_element(By.XPATH,"//*[contains(text(), 'new empty question')]/../../..//div[contains(text(), 'Single-Choice')]").click()
-        sleep(1)
-        driver.find_element(By.XPATH,"//*[contains(text(), 'new empty question')]/../../..//textarea[@placeholder='Question *']").send_keys(single_choice_1)
-        sleep(1)
-        driver.find_element(By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 1*']".format(single_choice_1)).send_keys(single_choice_1_opt_1)
+        click()
+        wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "div.left.wide mat-slider")))
+        click()
+        wait.until(EC.visibility_of_element_located((By.XPATH,"//*[contains(text(), 'new empty question')]/../../..//textarea[@placeholder='Question *']"))).send_keys(single_choice_1)
+        wait.until(EC.visibility_of_element_located((By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 1*']".format(single_choice_1)))).send_keys(single_choice_1_opt_1)
         driver.find_element(By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 1*']/../../../../..//mat-radio-button".format(single_choice_1)).click()
-
         driver.find_element(By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 2*']".format(single_choice_1)).send_keys(single_choice_1_opt_2)
-        sleep(1)
-        driver.find_element(By.CSS_SELECTOR, "div.controls.ng-star-inserted>button").click()
-        sleep(1)
 
-        driver.find_element(By.XPATH,"//*[contains(text(), 'new empty question')]/../../..//div[contains(text(), 'Single-Choice')]").click()
-        sleep(1)
-        driver.find_element(By.XPATH,"//*[contains(text(), 'new empty question')]/../../..//textarea[@placeholder='Question *']").send_keys(single_choice_2)
-        sleep(1)
-        driver.find_element(By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 1*']".format(single_choice_2)).send_keys(single_choice_2_opt_1)
+        click()
+        wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "div.left.wide mat-slider")))
+        click()
+        wait.until(EC.visibility_of_element_located((By.XPATH,"//*[contains(text(), 'new empty question')]/../../..//textarea[@placeholder='Question *']"))).send_keys(single_choice_2)
+        wait.until(EC.visibility_of_element_located((By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 1*']".format(single_choice_2)))).send_keys(single_choice_2_opt_1)
         driver.find_element(By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 1*']/../../../../..//mat-radio-button".format(single_choice_2)).click()
         driver.find_element(By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 2*']".format(single_choice_2)).send_keys(single_choice_2_opt_2)
-        sleep(1)
-        driver.find_element(By.CSS_SELECTOR, "div.controls.ng-star-inserted>button").click()
-        sleep(1)
 
-        driver.find_element(By.XPATH,"//*[contains(text(), 'new empty question')]/../../..//div[contains(text(), 'Single-Choice')]").click()
-        sleep(1)
-        driver.find_element(By.XPATH,"//*[contains(text(), 'new empty question')]/../../..//textarea[@placeholder='Question *']").send_keys(single_choice_3)
-        sleep(1)
-        driver.find_element(By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 1*']".format(single_choice_3)).send_keys(single_choice_3_opt_1)
+        click()
+        wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "div.left.wide mat-slider")))
+        click()
+        wait.until(EC.visibility_of_element_located((By.XPATH,"//*[contains(text(), 'new empty question')]/../../..//textarea[@placeholder='Question *']"))).send_keys(single_choice_3)
+        wait.until(EC.visibility_of_element_located((By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 1*']".format(single_choice_3)))).send_keys(single_choice_3_opt_1)
         driver.find_element(By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 1*']/../../../../..//mat-radio-button".format(single_choice_3)).click()
         driver.find_element(By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 2*']".format(single_choice_3)).send_keys(single_choice_3_opt_2)
-        sleep(1)
-        driver.find_element(By.CSS_SELECTOR, "div.controls.ng-star-inserted>button").click()
-        sleep(1)
+
 
         # Multiple choice questions:
         multiple_choice_1 = "What is a Bug?"
@@ -144,55 +126,38 @@ class CreateQuizes(unittest.TestCase):
         multiple_choice_3_opt_1 = "Tracking the bugs"
         multiple_choice_3_opt_2 = "To get a bug fixed"
 
-        driver.find_element(By.XPATH,"//*[contains(text(), 'new empty question')]/../../..//div[contains(text(), 'Multiple-Choice')]").click()
-        sleep(1)
-        driver.find_element(By.XPATH,"//*[contains(text(), 'new empty question')]/../../..//textarea[@placeholder='Question *']").send_keys(multiple_choice_1)
-        sleep(1)
-        driver.find_element(By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 1*']".format(multiple_choice_1)).send_keys(multiple_choice_1_opt_1)
+        click()
+        click()
+        wait.until(EC.visibility_of_element_located((By.XPATH,"//*[contains(text(), 'new empty question')]/../../..//textarea[@placeholder='Question *']"))).send_keys(multiple_choice_1)
+        wait.until(EC.visibility_of_element_located((By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 1*']".format(multiple_choice_1)))).send_keys(multiple_choice_1_opt_1)
         driver.find_element(By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 1*']/../../../../../mat-checkbox".format(multiple_choice_1)).click()
         driver.find_element(By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 2*']".format(multiple_choice_1)).send_keys(multiple_choice_1_opt_2)
-        sleep(1)
-        driver.find_element(By.CSS_SELECTOR, "div.controls.ng-star-inserted>button").click()
-        sleep(1)
+        click()
 
-        driver.find_element(By.XPATH,"//*[contains(text(), 'new empty question')]/../../..//div[contains(text(), 'Multiple-Choice')]").click()
-        sleep(1)
-        driver.find_element(By.XPATH,"//*[contains(text(), 'new empty question')]/../../..//textarea[@placeholder='Question *']").send_keys(multiple_choice_2)
-        sleep(1)
-        driver.find_element(By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 1*']".format(multiple_choice_2)).send_keys(multiple_choice_2_opt_1)
+        click()
+        wait.until(EC.visibility_of_element_located((By.XPATH,"//*[contains(text(), 'new empty question')]/../../..//textarea[@placeholder='Question *']"))).send_keys(multiple_choice_2)
+        wait.until(EC.visibility_of_element_located((By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 1*']".format(multiple_choice_2)))).send_keys(multiple_choice_2_opt_1)
         driver.find_element(By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 2*']".format(multiple_choice_2)).send_keys(multiple_choice_2_opt_2)
         driver.find_element(By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 2*']/../../../../../mat-checkbox".format(multiple_choice_2)).click()
-        sleep(1)
-        driver.find_element(By.CSS_SELECTOR, "div.controls.ng-star-inserted>button").click()
-        sleep(1)
+        click()
 
-        driver.find_element(By.XPATH,"//*[contains(text(), 'new empty question')]/../../..//div[contains(text(), 'Multiple-Choice')]").click()
-        sleep(1)
-        driver.find_element(By.XPATH,"//*[contains(text(), 'new empty question')]/../../..//textarea[@placeholder='Question *']").send_keys(multiple_choice_3)
-        sleep(1)
-        driver.find_element(By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 1*']".format(multiple_choice_3)).send_keys(multiple_choice_3_opt_1)
+        click()
+        wait.until(EC.visibility_of_element_located((By.XPATH,"//*[contains(text(), 'new empty question')]/../../..//textarea[@placeholder='Question *']"))).send_keys(multiple_choice_3)
+        wait.until(EC.visibility_of_element_located((By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 1*']".format(multiple_choice_3)))).send_keys(multiple_choice_3_opt_1)
         driver.find_element(By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 2*']".format(multiple_choice_3)).send_keys(multiple_choice_3_opt_2)
         driver.find_element(By.XPATH, "//*[contains(text(), '{}')]/../../..//*[@placeholder='Option 2*']/../../../../../mat-checkbox".format(multiple_choice_3)).click()
-        sleep(1)
 
-
-        driver.find_element(By.XPATH, "//button/*[contains(text(),'Save')]").click()
-        sleep(2)
-
+        click()
         quiz_locator = "//ac-quizzes-list//div[@class = 'quizzes']//*[contains(text(),'{}')]".format(quiz_name)
-
-        wait.until(EC.presence_of_element_located((By.XPATH, quiz_locator)))
+        wait.until(EC.visibility_of_element_located((By.XPATH, quiz_locator)))
         element = driver.find_element_by_xpath(quiz_locator)
         driver.execute_script("arguments[0].scrollIntoView();", element)
-        element.click()
-        sleep(1)
+        click()
         driver.get_screenshot_as_file('{} created.png'.format(quiz_name))
-
-        driver.find_element_by_xpath("//div[@class='mat-list-item-content']//h5[contains(text(),'Log Out')]").click()
+        click()
         wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".mat-button.mat-warn")))
-        driver.find_element_by_css_selector(".mat-button.mat-warn").click()
-        sleep(2)
-
+        click()
+        wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,"button[type='submit']")))
 
 
         #Sign in with role TEACHER

@@ -19,6 +19,8 @@ import re
 #         print(by, value, "found")
 #     def on_exception(self, exception, driver):
 #         print(exception)
+from steps.common import click
+
 
 class ChangeUsersRoleTestCase(unittest.TestCase):
 
@@ -60,7 +62,7 @@ class ChangeUsersRoleTestCase(unittest.TestCase):
         driver.find_element_by_id("mat-input-3").send_keys(group_id)
         driver.find_element_by_id("mat-input-4").send_keys(password)
         driver.find_element_by_id("mat-input-5").send_keys(confirm_password)
-        driver.find_element_by_class_name("mat-raised-button").click()
+        click()
 
         # Waits until new page loads
         back_to_login_page_btn = (By.XPATH, "//button/span[text()='Back to Login Page']")
@@ -77,7 +79,7 @@ class ChangeUsersRoleTestCase(unittest.TestCase):
         driver.get(url_email)
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
 
-        driver.find_element_by_xpath("//div[@id = 'email-table']//div[contains(text(),'assessment.portnov@gmail.com')]").click()
+        click()
 
         wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "a.btn-primary")))
         activation_link = driver.find_element_by_css_selector("a.btn-primary").get_attribute('href')
@@ -105,12 +107,12 @@ class ChangeUsersRoleTestCase(unittest.TestCase):
         driver.get(login_url)
         driver.find_element_by_id("mat-input-0").send_keys(email_teacher)
         driver.find_element_by_id("mat-input-1").send_keys(password_teacher)
-        driver.find_element_by_css_selector("button[type='submit']").click()
+        click()
 
         wait.until(EC.presence_of_element_located((By.XPATH,"// div[@class = 'info']/p[contains(text(),'TEACHER')]")))
 
         side_menu = driver.find_element_by_css_selector("ac-side-menu")
-        side_menu.find_element_by_xpath('//h5[contains(text(),"User\'s Management")]').click()
+        click()
 
         first_name = "Appolon"
         last_name = "Jackson"
@@ -118,20 +120,20 @@ class ChangeUsersRoleTestCase(unittest.TestCase):
         wait.until(EC.presence_of_element_located((By.XPATH, user_locator)))
         element = driver.find_element_by_xpath(user_locator)
         driver.execute_script("arguments[0].scrollIntoView();", element)
-        element.click()
+        click()
         wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button.mat-raised-button>span")))
         sleep(1)
         driver.get_screenshot_as_file('{} {} role before change.png'.format(first_name,last_name))
-        driver.find_element_by_css_selector("button.mat-raised-button>span").click()
+        click()
         wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="cdk-overlay-0"]/div/div/button[2][contains(text(),"")]')))
         sleep(1)
-        driver.find_element_by_xpath('//*[@id="cdk-overlay-0"]/div/div/button[2][contains(text(),"")]').click()
+        click()
         sleep(2)
-        driver.find_element_by_xpath("// ac-modal-confirmation//button[@class='mat-button mat-warn']").click()
+        click()
         sleep(1)
-        driver.find_element_by_xpath("//div[@class='mat-list-item-content']//h5[contains(text(),'Log Out')]").click()
+        click()
         wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, ".mat-button.mat-warn")))
-        driver.find_element_by_css_selector(".mat-button.mat-warn").click()
+        click()
         sleep(2)
 
 
@@ -142,7 +144,7 @@ class ChangeUsersRoleTestCase(unittest.TestCase):
 
         driver.find_element_by_css_selector("div>*[formcontrolname = 'email']").send_keys(email)
         driver.find_element_by_css_selector("div>*[formcontrolname = 'password']").send_keys(password)
-        driver.find_element_by_css_selector("button[type='submit']").click()
+        click()
 
         wait.until(EC.presence_of_element_located((By.XPATH, "// div[@class = 'info']/p[contains(text(),'TEACHER')]")))
         driver.get_screenshot_as_file('{} {} role after change.png'.format(first_name,last_name))
