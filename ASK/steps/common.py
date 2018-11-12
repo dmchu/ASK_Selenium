@@ -155,6 +155,6 @@ def delete_quiz_api(self, email, password, quiz_name):
     url = "http://local.school.portnov.com:4520/api/v1/quiz/{}".format(quiz_id)
 
     r = requests.delete(url, headers=headers)
-    print(r.status_code)
+    print("Status code:",r.status_code)
     self.assertTrue(r.status_code == 200)
     print("Quiz: {}  with id {} was permanently deleted".format(quiz_name, quiz_id))

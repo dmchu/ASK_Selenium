@@ -16,6 +16,10 @@ class CreateQuizes(unittest.TestCase):
 
 
     def tearDown(self):
+
+        if self.quiz_name:
+            delete_quiz_api(self, self.email_teacher, self.password_teacher, self.quiz_name)
+
         self.driver.quit()
 
 
@@ -80,10 +84,13 @@ class CreateQuizes(unittest.TestCase):
         create_multiple_choice_question(driver, wait, multiple_choice_3, multiple_choice_3_opt_2, multiple_choice_3_opt_1, multiple_choice_3_opt_2)
 
         save_quiz(driver, wait)
+        self.quiz_name = quiz_name
+        self.email_teacher = email_teacher
+        self.password_teacher = password_teacher
+
         find_quizz(driver, wait, quiz_name)
         driver.get_screenshot_as_file('{} created.png'.format(quiz_name))
         logout(driver, wait)
-        delete_quiz_api(self, email_teacher,password_teacher,quiz_name)
 
 if __name__ == '__main__':
     unittest.main()
