@@ -1,5 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+
+from fixtures.params import DOMAIN
 from parameters.parameters import *
 from pages.base_page import BasePage
 
@@ -16,7 +18,7 @@ class LoginPage(BasePage):
 
     def __init__(self, driver):
         super(LoginPage, self).__init__(driver)
-        self.page_url = "http://local.school.portnov.com:4520/#/login"
+        self.page_url = DOMAIN + "/login"
 
     def login_as_teacher(self,email_teacher,password_teacher):
         driver = self.driver
