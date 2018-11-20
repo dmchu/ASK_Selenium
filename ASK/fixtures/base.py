@@ -1,16 +1,19 @@
 import unittest
-
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 
+from fixtures.params import *
 from pages.login_page import LoginPage
 from parameters.parameters import *
 
 
 class BaseTestCase(unittest.TestCase):
     def setUp(self):
+
+
         self.driver = webdriver.Chrome(executable_path="../browsers/chromedriver")
-        self.wait = WebDriverWait(self.driver, 20)
+        # self.driver = webdriver.Chrome(executable_path=CHROME_EXECUTABLE_PATH)
+        self.wait = WebDriverWait(self.driver, EXPLICIT_TIMEOUT)
 
     def tearDown(self):
         self.driver.quit()
