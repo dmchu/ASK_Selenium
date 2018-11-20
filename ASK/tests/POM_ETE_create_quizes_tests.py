@@ -4,12 +4,11 @@ from parameters.parameters import *
 from steps.common import *
 
 
+
 class CreateQuizes(TeacherLoginTestCase):
 
     def setUp(self):
         super(CreateQuizes, self).setUp()
-        # self.login_page = LoginPage(self.driver)
-        # self.login_page.goto_page()
 
     def tearDown(self):
         super(CreateQuizes, self).tearDown()
