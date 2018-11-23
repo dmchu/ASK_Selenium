@@ -1,16 +1,12 @@
 import unittest
 from time import sleep
 from random import randint
-
-import requests
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
-import requests
 import json
-import re
 # from selenium.webdriver.support.events import EventFiringWebDriver, AbstractEventListener
 #
 #
