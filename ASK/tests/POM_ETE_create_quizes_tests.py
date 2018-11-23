@@ -42,7 +42,6 @@ class CreateQuizes(TeacherLoginTestCase):
 
         find_quizz(driver, wait, quiz_name)
         driver.get_screenshot_as_file('{} created.png'.format(quiz_name))
-        logout(driver, wait)
 
 
 if __name__ == '__main__':
