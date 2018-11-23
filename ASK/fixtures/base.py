@@ -1,6 +1,7 @@
 import unittest
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
+from direct_commands.commands_with_api import *
 
 from fixtures.params import *
 from pages.login_page import LoginPage
