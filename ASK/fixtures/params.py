@@ -1,7 +1,5 @@
 import os
 
-
-
 cwd = os.path.abspath(os.getcwd())
 location = "../browsers/chromedriver"
 
