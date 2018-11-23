@@ -10,15 +10,21 @@ email_teacher = 'alina.korolevich@yopmail.com'
 password_teacher = 'internship'
 user_role = "TEACHER"
 
+email_student = 's_n1996h@mia6ben90uriobp.tk'
+password_student = 'internship'
+student_id = 'L9018'
+
 number = randint(100,1000)
 quiz_name = "QA BASIC {}".format(number)
 textual_question_1 = "What is Software Testing?"
+textual_question_1_answer = 'Software Testing is the process of analyzing the software in order to detect differences between existing and required conditions and to evaluate the features of the software.'
 textual_question_2 = "What is Software Quality Assurance?"
 textual_question_3 = "Explain SDLC methodology?"
 
 # Single choice questions:
 single_choice_1 = "What is a Defect?"
 single_choice_1_opt_1 = "Any flaw or imperfection in a software work product"
+single_choice_1_answer = single_choice_1_opt_1
 single_choice_1_opt_2 = "without any issues"
 single_choice_2 = "What is Priority?"
 single_choice_2_opt_1 = "It indicates the importance or urgency of fixing a defect"
@@ -31,6 +37,7 @@ single_choice_3_opt_2 = "with code"
 multiple_choice_1 = "What is a Bug?"
 multiple_choice_1_opt_1 = "Mismatch between actual and intended behaviors of the software"
 multiple_choice_1_opt_2 = "Some small insect that flies around"
+multiple_choice_1_answer = multiple_choice_1_opt_1
 multiple_choice_2 = "Are Java and Javascript same languages?"
 multiple_choice_2_opt_1 = "Yes"
 multiple_choice_2_opt_2 = "No"
