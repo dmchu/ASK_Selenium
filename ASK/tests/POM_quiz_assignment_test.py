@@ -18,11 +18,12 @@ class QuizAssignmentTestCase(BaseTestCase):
         self.login_page.goto_page()
 
     def tearDown(self):
-        # super(QuizAssignmentTestCase, self).tearDown()
-        if self.quiz_name:
-            delete_quiz_api(self, email_teacher, password_teacher, self.quiz_name)
+        super(QuizAssignmentTestCase, self).tearDown()
         if self.assignment:
             delete_assignment_api(self, email_teacher, password_teacher, self.quiz_name)
+        if self.quiz_name:
+            delete_quiz_api(self, email_teacher, password_teacher, self.quiz_name)
+
         self.driver.quit()
 
     def test_quiz_assignment(self):
@@ -39,7 +40,7 @@ class QuizAssignmentTestCase(BaseTestCase):
         quiz_page.create_multiple_choice_question(multiple_choice_1, multiple_choice_1_opt_1, multiple_choice_1_opt_1, multiple_choice_1_opt_2)
         quiz_page.save_quiz(quiz_name)
         self.quiz_name = quiz_name
-        driver.get_screenshot_as_file('{} created.png'.format(self.quiz_name))
+        # driver.get_screenshot_as_file('{} created.png'.format(self.quiz_name))
         # 3. go_to Assignment and create new assignment
         assignment_page = AssignmentPage(driver)
         assignment_page.goto_page()
@@ -65,8 +66,9 @@ class QuizAssignmentTestCase(BaseTestCase):
         # verify that page loads
         result_label = "//div[@class = 'result']/div[contains(text(), 'ASSESSMENT')]"
         self.assertTrue(driver.find_element(By.XPATH, result_label))
-        driver.get_screenshot_as_file('Assignment for {} created.png'.format(self.quiz_name))
+        # driver.get_screenshot_as_file('Assignment for {} created.png'.format(self.quiz_name))
         login_page.logout()
+        # delete_assignment_api(self, email_teacher, password_teacher, self.quiz_name)
 
 if __name__ == '__main__':
     unittest.main()
