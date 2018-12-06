@@ -13,6 +13,7 @@ class BaseTestCase(unittest.TestCase):
 
 
         self.driver = webdriver.Chrome(executable_path="../browsers/chromedriver")
+        # self.driver = webdriver.Firefox(executable_path="../browsers/geckodriver")
         # self.driver = webdriver.Chrome(executable_path=CHROME_EXECUTABLE_PATH)
         self.wait = WebDriverWait(self.driver, EXPLICIT_TIMEOUT)
 
