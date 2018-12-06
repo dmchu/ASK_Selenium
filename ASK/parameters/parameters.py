@@ -10,9 +10,9 @@ email_teacher = 'alina.korolevich@yopmail.com'
 password_teacher = 'internship'
 user_role = "TEACHER"
 
-email_student = 's_n1996h@mia6ben90uriobp.tk'
-password_student = 'internship'
-student_id = 'L9018'
+email_student = 'talexandar@xumail.cf'
+
+
 
 number = randint(100,1000)
 quiz_name = "QA BASIC {}".format(number)
@@ -44,3 +44,15 @@ multiple_choice_2_opt_2 = "No"
 multiple_choice_3 = "What is a prime objective of a bug tracking database?"
 multiple_choice_3_opt_1 = "Tracking the bugs"
 multiple_choice_3_opt_2 = "To get a bug fixed"
+
+# Forgot password:
+email_not_in_database = "email@yopmail.com"
+email_in_database = "vannihacoz-8337@yopmail.com"
+empty_email = ''
+email_invalid = 'abcd.com'
+email_valid = "talexandar@xumail.cf"
+url_valid_email = 'https://generator.email/talexandar@xumail.cf'
+user_name = "Andrew Hoffman"
+new_valid_password = "internship{}".format(number)
+val_password = 'internship601'
+student_id = 'a345'
