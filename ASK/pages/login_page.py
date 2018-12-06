@@ -10,7 +10,8 @@ locators = {
     "login_password": (By.XPATH, "//input[@type='password']"),
     "submit_button": (By.CSS_SELECTOR, "button[type='submit']"),
     "teacher_role_text": (By.XPATH, "// div[@class = 'info']/p[contains(text(),'TEACHER')]"),
-    "student_role_text": (By.XPATH, "// div[@class = 'info']/p[contains(text(),'STUDENT')]")
+    "student_role_text": (By.XPATH, "// div[@class = 'info']/p[contains(text(),'STUDENT')]"),
+    "user_name": (By.XPATH, "//h3[contains(text(),'{}')]".format(user_name))
 }
 
 
@@ -31,5 +32,11 @@ class LoginPage(BasePage):
         self.driver.find_element(locators["login_password"][0], locators["login_password"][1]).send_keys(password_student)
         self.driver.find_element(locators["submit_button"][0], locators["submit_button"][1]).click()
         self.wait.until(EC.presence_of_element_located(locators["student_role_text"]))
+
+    def login(self,email, password):
+        self.wait.until(EC.presence_of_element_located((locators["login_email"]["by"], locators["login_email"]["locator"]))).send_keys(email)
+        self.driver.find_element(locators["login_password"][0], locators["login_password"][1]).send_keys(password)
+        self.driver.find_element(locators["submit_button"][0], locators["submit_button"][1]).click()
+        self.wait.until(EC.presence_of_element_located(locators["user_name"]))
 
 
