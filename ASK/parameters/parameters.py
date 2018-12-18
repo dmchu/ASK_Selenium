@@ -53,6 +53,6 @@ email_invalid = 'abcd.com'
 email_valid = "talexandar@xumail.cf"
 url_valid_email = 'https://generator.email/talexandar@xumail.cf'
 user_name = "Andrew Hoffman"
+val_password = 'internship884'
 new_valid_password = "internship{}".format(number)
-val_password = 'internship601'
 student_id = 'a345'
