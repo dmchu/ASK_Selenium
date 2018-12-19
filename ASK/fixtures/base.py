@@ -1,4 +1,7 @@
+
 import unittest
+from webbrowser import Error
+
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 from fixtures.params import *
@@ -17,10 +20,22 @@ class MyListener(AbstractEventListener):
 
 
 class BaseTestCase(unittest.TestCase):
+
+    def get_browser(self):
+        if BROWSER_TYPE.lower().find('chrome') >= 0:
+            return webdriver.Chrome(executable_path=CHROME_EXECUTABLE_PATH)
+        elif BROWSER_TYPE.lower().find('firefox') >= 0:
+            return webdriver.Firefox(executable_path=FIREFOX_EXECUTABLE_PATH)
+        else:
+            raise Error('No such browser')
+
+
     def setUp(self):
 
-        # self.driver = EventFiringWebDriver(webdriver.Chrome(executable_path="../browsers/chromedriver"), MyListener())
-        self.driver = webdriver.Chrome(executable_path="../browsers/chromedriver")
+        # self.driver = EventFiringWebDriver(webdriver.Chrome(executable_path=CHROME_EXECUTABLE_PATH), MyListener())
+        # self.driver = EventFiringWebDriver(self.get_browser(), MyListener())
+        self.driver = self.get_browser()
+        #self.driver = webdriver.Chrome(executable_path="../browsers/chromedriver")
         # self.driver = webdriver.Firefox(executable_path="../browsers/geckodriver")
         # self.driver = webdriver.Chrome(executable_path=CHROME_EXECUTABLE_PATH)
         self.wait = WebDriverWait(self.driver, EXPLICIT_TIMEOUT)
